@@ -36,6 +36,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'uiGmapgoogle-maps'])
     controller:  'MapCtrl',
     templateUrl: 'partials/map.html'
   });
+  
   $urlRouterProvider.otherwise('/');
 
   uiGmapGoogleMapApiProvider.configure({
