@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ngCordova', 'uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,7 +18,7 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
   $stateProvider
   .state('start', {
     url: '/',
@@ -30,11 +30,24 @@ angular.module('starter', ['ionic'])
     url: '/stop',
     controller:  'StopCtrl',
     templateUrl: 'partials/stop.html'
+  })
+  .state('maps', {
+    url: '/map',
+    controller:  'MapCtrl',
+    templateUrl: 'partials/map.html'
   });
   $urlRouterProvider.otherwise('/');
+
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyBj2RcHMpDpfowYBPqa2EuhneBtcrFF6cc',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization'
+  });
 })
 
 .value('range', {
-  coef: 0.0,
-  km:   0.0
+  coef:      0.0,
+  distance:  0.0,
+  avg_speed: 0.0,
+  points:    []
 })
